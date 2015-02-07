@@ -13236,6 +13236,20 @@
       deepEqual(actual, expected);
     });
 
+    test('should use `_.constant` when `iteratee` is not a function or nullish', 1, function() {
+      var values = [1, '1', Object(1)];
+
+      var expected = _.map(values, function(value) {
+        return _.times(3, _.constant(value));
+      });
+
+      var actual = _.map(values, function(value, index) {
+        return _.times(3, value);
+      });
+
+      deepEqual(actual, expected);
+    });
+
     test('should return an array of the results of each `iteratee` execution', 1, function() {
       deepEqual(_.times(3, function(n) { return n * 2; }), [0, 2, 4]);
     });

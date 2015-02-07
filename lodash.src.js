@@ -10543,7 +10543,10 @@
       var index = -1,
           result = Array(nativeMin(n, MAX_ARRAY_LENGTH));
 
-      iteratee = bindCallback(iteratee, thisArg, 1);
+      iteratee = (iteratee != null && typeof iteratee != 'function')
+        ? constant(iteratee)
+        : bindCallback(iteratee, thisArg, 1);
+
       while (++index < n) {
         if (index < MAX_ARRAY_LENGTH) {
           result[index] = iteratee(index);
